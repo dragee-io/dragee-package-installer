@@ -1,1 +1,1 @@
-export { lookupForProjects } from "./src/project-lookup.ts";
+export { lookupForProjects } from './src/project-lookup.ts';

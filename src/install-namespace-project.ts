@@ -1,7 +1,7 @@
 import { readFileSync, unlink } from 'node:fs';
 import { Readable } from 'node:stream';
+import { type Result, ok } from '@dragee-io/type/common';
 import { Parser, type ReadEntry } from 'tar';
-import { type Result, ok } from './fp/result.model.ts';
 import {
     downloadProjectAndGetName,
     removeVersionAndExtension

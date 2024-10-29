@@ -1,6 +1,5 @@
+import { type Maybe, type Nullable, type Result, none, some } from '@dragee-io/type/common';
 import { $, Glob } from 'bun';
-import { type Maybe, type Nullable, none, some } from './fp/maybe.model.ts';
-import type { Result } from './fp/result.model.ts';
 import { install } from './install-namespace-project.ts';
 
 const findProjectLocally = async <T>(
