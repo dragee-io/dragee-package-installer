@@ -1,0 +1,23 @@
+{
+    "name": "@dragee-io/grapher-generator",
+    "module": "index.ts",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "format": "biome format --write",
+        "lint": "biome lint --write",
+        "check": "biome check --write"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "@types/bun": "latest"
+    },
+    "peerDependencies": {
+        "typescript": "^5.5.0"
+    },
+    "dependencies": {
+        "@dragee-io/type": "https://github.com/dragee-io/dragee-model",
+        "axios": "^1.7.7",
+        "tar": "^7.4.3"
+    }
+}
