@@ -26,7 +26,6 @@ export const install = async <T>(
     );
     for (const file of files) {
         const filePath = file.path.replace('package/', '');
-        console.log('writing ', `${destinationDirectoryName}/${filePath}`);
         await Bun.write(`${destinationDirectoryName}/${filePath}`, file.content);
     }
 
