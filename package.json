@@ -1,5 +1,5 @@
 {
-    "name": "@dragee-io/grapher-generator",
+    "name": "@dragee-io/package-installer",
     "module": "index.ts",
     "type": "module",
     "version": "0.0.1",
