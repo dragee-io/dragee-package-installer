@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import { type Maybe, type Nullable, type Result, none, some } from '@dragee-io/type/common';
 import { $, Glob } from 'bun';
 import { install } from './install-namespace-project.ts';
@@ -10,7 +11,8 @@ const findProjectLocally = async <T>(
     if (!fileName) return none();
     try {
         // Install dependancies with Bun shell
-        await $`cd ${localRegistryPath}/${projectName}/; bun install`;
+        if (!existsSync(`${localRegistryPath}/${projectName}/node_modules`))
+            await $`cd ${localRegistryPath}/${projectName}/; bun install`;
 
         // Import default
         const project = require(fileName).default as NonNullable<T>;
