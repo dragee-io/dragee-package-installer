@@ -3,7 +3,7 @@ import { type Maybe, type Nullable, type Result, none, some } from '@dragee-io/t
 import { $, Glob } from 'bun';
 import { install } from './install-namespace-project.ts';
 
-const findProjectLocally = async <T>(
+export const findProjectLocally = async <T>(
     localRegistryPath: string,
     projectName: string
 ): Promise<Maybe<T>> => {
@@ -23,7 +23,7 @@ const findProjectLocally = async <T>(
     }
 };
 
-const findProjectIndex = async (localRegistryPath: string, projectName: string) => {
+export const findProjectIndex = async (localRegistryPath: string, projectName: string) => {
     const glob = new Glob('index.ts');
     const scan = glob.scan({
         cwd: `${localRegistryPath}/${projectName}/`,
@@ -41,7 +41,7 @@ const findProjectIndex = async (localRegistryPath: string, projectName: string) 
     }
 };
 
-const installFor = async <T>(
+export const installFor = async <T>(
     projectsRegistryUrl: string,
     localRegistryPath: string,
     projectName: string
