@@ -46,7 +46,7 @@ type ExtractedFile = {
     content: Buffer;
 };
 
-const decompress = (arrayBuffer: Buffer): Promise<ExtractedFile[]> =>
+export const decompress = (arrayBuffer: Buffer): Promise<ExtractedFile[]> =>
     new Promise((resolve, reject) => {
         const buffer = Buffer.from(arrayBuffer);
         const parseStream = new Parser();
@@ -54,7 +54,6 @@ const decompress = (arrayBuffer: Buffer): Promise<ExtractedFile[]> =>
 
         parseStream
             .on('entry', (entry: ReadEntry) => {
-                // const chunks: Buffer[] = [];
                 const chunks: Buffer[] = [];
                 entry.on('data', (chunk: Buffer) => chunks.push(chunk));
                 entry.on('end', () => {
