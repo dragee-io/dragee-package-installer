@@ -10,7 +10,7 @@ export const downloadProjectAndGetName = async (
     const projectArchiveUrl = `${projectsRegistryUrl}/${projectName}/latest`;
 
     try {
-        const downloadData = (
+        const downloadInfo = (
             await axios.get(projectArchiveUrl, {
                 headers: {
                     Accept: 'application/json'
@@ -18,7 +18,7 @@ export const downloadProjectAndGetName = async (
             })
         ).data.dist;
 
-        const tarball = downloadData.tarball;
+        const tarball = downloadInfo.tarball;
         const fileName = tarball.split('/').pop();
         const filePath = `${projectsDirectory}/${removeVersionAndExtension(fileName)}/${fileName}`;
 
@@ -29,7 +29,7 @@ export const downloadProjectAndGetName = async (
         await Bun.write(filePath, data);
         console.log(`Project ${projectName} has been downloaded`);
 
-        controlPackageIntegrity(downloadData.integrity as string, filePath, projectName);
+        controlPackageIntegrity(downloadInfo.integrity as string, filePath, projectName);
 
         return fileName;
     } catch (err) {
