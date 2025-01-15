@@ -1,6 +1,5 @@
-import { existsSync } from 'node:fs';
 import { type Maybe, type Nullable, type Result, none, some } from '@dragee-io/type/common';
-import { $, Glob } from 'bun';
+import { Glob } from 'bun';
 import { install } from './install-namespace-project.ts';
 
 export const findProjectLocally = async <T>(
@@ -8,12 +7,6 @@ export const findProjectLocally = async <T>(
     projectName: string
 ): Promise<Maybe<T>> => {
     try {
-        // Install dependancies with Bun shell
-        if (!existsSync(`${localRegistryPath}/${projectName}/node_modules`)) {
-            await $`cd ${localRegistryPath}/${projectName}/; bun install`;
-            console.log(`Project ${projectName} has been installed`);
-        }
-
         const fileName = await findProjectIndex(localRegistryPath, projectName);
         if (!fileName) return none();
 

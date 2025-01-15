@@ -1,4 +1,4 @@
-import { readFileSync, unlink } from 'node:fs';
+import { existsSync, readFileSync, unlink } from 'node:fs';
 import { Readable } from 'node:stream';
 import { type Result, ok } from '@dragee-io/type/common';
 import { Parser, type ReadEntry } from 'tar';
@@ -6,6 +6,7 @@ import {
     downloadProjectAndGetName,
     removeVersionAndExtension
 } from './services/project.service.ts';
+import { $ } from 'bun';
 
 export const install = async <T>(
     projectsRegistryUrl: string,
@@ -27,6 +28,12 @@ export const install = async <T>(
     for (const file of files) {
         const filePath = file.path.replace('package/', '');
         await Bun.write(`${destinationDirectoryName}/${filePath}`, file.content);
+    }
+
+    // Install dependancies with Bun shell
+    if (!existsSync(`${localRegistryPath}/${projectName}/node_modules`)) {
+        await $`cd ${localRegistryPath}/${projectName}/; bun install`;
+        console.log(`Project ${projectName} has been installed`);
     }
 
     // Import
