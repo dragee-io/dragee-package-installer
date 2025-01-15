@@ -11,8 +11,10 @@ export const findProjectLocally = async <T>(
     if (!fileName) return none();
     try {
         // Install dependancies with Bun shell
-        if (!existsSync(`${localRegistryPath}/${projectName}/node_modules`))
+        if (!existsSync(`${localRegistryPath}/${projectName}/node_modules`)) {
             await $`cd ${localRegistryPath}/${projectName}/; bun install`;
+            console.log(`Project ${projectName} has been installed`);
+        }
 
         // Import default
         const project = require(fileName).default as NonNullable<T>;
