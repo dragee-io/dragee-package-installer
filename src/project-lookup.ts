@@ -7,14 +7,15 @@ export const findProjectLocally = async <T>(
     localRegistryPath: string,
     projectName: string
 ): Promise<Maybe<T>> => {
-    const fileName = await findProjectIndex(localRegistryPath, projectName);
-    if (!fileName) return none();
     try {
         // Install dependancies with Bun shell
         if (!existsSync(`${localRegistryPath}/${projectName}/node_modules`)) {
             await $`cd ${localRegistryPath}/${projectName}/; bun install`;
             console.log(`Project ${projectName} has been installed`);
         }
+
+        const fileName = await findProjectIndex(localRegistryPath, projectName);
+        if (!fileName) return none();
 
         // Import default
         const project = require(fileName).default as NonNullable<T>;
