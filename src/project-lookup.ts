@@ -68,8 +68,5 @@ export const lookupForProjects = async <T>(
         if (project) projects.push(project as NonNullable<T>);
     }
 
-    console.log('List of projects matching dragees');
-    console.table(projects, ['projectName', 'fileName']);
-
     return projects;
 };
